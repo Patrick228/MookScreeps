@@ -28,7 +28,17 @@ var roleBuilder = {
                 }
             }
             else {
-            creep.moveTo(Game.spawns['Spawn1']
+            var targetsrep = creep.room.find(FIND_STRUCTURES, {
+    filter: object => object.hits < object.hitsMax
+});
+
+targetsrep.sort((a,b) => a.hits - b.hits);
+
+if(targetsrep.length > 0) {
+    if(creep.repair(targetsrep[0]) == ERR_NOT_IN_RANGE) {
+        creep.moveTo(targetsrep[0]);
+    }
+}
             }
 	    }
 	}
