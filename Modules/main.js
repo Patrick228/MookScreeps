@@ -1,8 +1,13 @@
+const profiler = require('screeps-profiler');
+
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 
+profiler.enable();
+
 module.exports.loop = function () {
+    profiler.wrap(function(){
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     console.log('Upgraders: ' + upgraders.length);
     if(upgraders.length < 5) {
@@ -52,4 +57,5 @@ module.exports.loop = function () {
             roleBuilder.run(creep);
         }
     }
+});
 }
