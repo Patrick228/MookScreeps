@@ -8,6 +8,11 @@ profiler.enable();
 
 module.exports.loop = function () {
     profiler.wrap(function(){
+for(var name in Memory.creeps) {
+    if(!Game.creeps[name]) {
+        delete Memory.creeps[name];
+    }
+}
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     console.log('Upgraders: ' + upgraders.length);
     if(upgraders.length < 5) {
@@ -18,7 +23,7 @@ module.exports.loop = function () {
     }
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     console.log('Builders: ' + builders.length);
-    if(builders.length < 3) {
+    if(builders.length < 5) {
         var newNameB = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newNameB);
         Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newNameB,
@@ -27,7 +32,7 @@ module.exports.loop = function () {
 
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     console.log('Harvesters: ' + harvesters.length);
-    if(harvesters.length < 6) {
+    if(harvesters.length < 7) {
         var newNameH = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newNameH);
         Game.spawns['Spawn1'].spawnCreep([WORK, CARRY,  MOVE], newNameH,
@@ -43,10 +48,6 @@ module.exports.loop = function () {
         }
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
-        if(!Game.creeps[name]) {
-            delete Memory.creeps[name];
-            console.log('Clearing non-existing creep memory:', name);
-        }
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
         }
