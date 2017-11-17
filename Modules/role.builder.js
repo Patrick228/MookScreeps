@@ -13,15 +13,15 @@ var roleBuilder = {
 	    }
 
 	    if(creep.memory.building) {
-	        var targets = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
-            if(targets.length) {
-                if(creep.build(targets) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets, {visualizePathStyle: {stroke: '#ffffff'}});
+	        var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+            if(targets.length > 0) {
+                if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
 	    }
 	    else {
-            if(creep.carry.energy < creep.carry.capacity) {
+            if(creep.carry.energy < creep.carry.carryCapacity) {
                 var source = creep.pos.findClosestByRange(FIND_SOURCES);
                 if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
