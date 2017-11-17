@@ -23,7 +23,7 @@ for(var name in Memory.creeps) {
     }
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     console.log('Builders: ' + builders.length);
-    if(builders.length < 5) {
+    if(builders.length < 6) {
         var newNameB = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newNameB);
         Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newNameB,
