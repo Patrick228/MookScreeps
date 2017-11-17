@@ -14,6 +14,9 @@ var roleHarvester = {
             if(creep.transfer(Game.spawns['Spawn1'], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             }
         }
+        else {
+        creep.moveTo(Game.flags['Flag1'])
+    }
     }
 };
 
